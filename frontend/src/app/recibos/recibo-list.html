@@ -1,0 +1,79 @@
+<section class="catalogo-page">
+  <header class="page-header">
+    <h1>Recibos emitidos</h1>
+  </header>
+
+  <mat-form-field appearance="outline" class="search-container">
+    <mat-label>Buscar recibo</mat-label>
+    <input
+      matInput
+      placeholder="Correlativo, socio, puesto o fecha..."
+      [value]="filtro()"
+      (input)="filtro.set($any($event.target).value)"
+    />
+  </mat-form-field>
+
+  @if (cargando()) {
+    <p class="estado">Cargando recibos...</p>
+  } @else {
+    <div class="mat-elevation-z2 table-wrapper">
+      <table mat-table [dataSource]="recibosFiltrados()" class="mat-table-full">
+        <ng-container matColumnDef="correlativo">
+          <th mat-header-cell *matHeaderCellDef>Correlativo</th>
+          <td mat-cell *matCellDef="let recibo">
+            <strong>{{ recibo.correlativo }}</strong>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef>Tipo</th>
+          <td mat-cell *matCellDef="let recibo">
+            <span class="rol-badge">{{ recibo.tipo }}</span>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fecha">
+          <th mat-header-cell *matHeaderCellDef>Fecha y Hora</th>
+          <td mat-cell *matCellDef="let recibo">{{ recibo.fecha | date: 'medium' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="destinatario">
+          <th mat-header-cell *matHeaderCellDef>Destinatario</th>
+          <td mat-cell *matCellDef="let recibo">
+            {{ recibo.destinatarioNombre }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="monto">
+          <th mat-header-cell *matHeaderCellDef>Total</th>
+          <td mat-cell *matCellDef="let recibo" class="monto-text">S/ {{ recibo.montoTotal }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef class="col-acciones">Acciones</th>
+          <td mat-cell *matCellDef="let recibo" class="col-acciones">
+            <a matButton="outlined" [routerLink]="['/recibos', recibo.id]">Ver detalle</a>
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="['correlativo', 'tipo', 'fecha', 'destinatario', 'monto', 'acciones']"
+        ></tr>
+        <tr
+          mat-row
+          *matRowDef="
+            let row;
+            columns: ['correlativo', 'tipo', 'fecha', 'destinatario', 'monto', 'acciones']
+          "
+        ></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell empty-state-cell" colspan="6">
+            No hay recibos que coincidan con la búsqueda.
+          </td>
+        </tr>
+      </table>
+    </div>
+  }
+</section>

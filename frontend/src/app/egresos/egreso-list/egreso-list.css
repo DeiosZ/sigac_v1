@@ -1,0 +1,102 @@
+.catalogo-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  margin: 0;
+  color: #1e293b;
+  font-size: 2rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.icon-margin-right {
+  margin-right: 0.5rem;
+}
+
+/* --- Filtros y Buscador --- */
+.filtros-container {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.filtro-mes {
+  width: 200px;
+}
+
+.search-container {
+  flex: 1;
+  max-width: 450px;
+}
+
+.estado {
+  color: #64748b;
+  padding: 3rem 0;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.empty-state {
+  padding: 2rem;
+}
+
+/* --- Tabla --- */
+.table-wrapper {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mat-table-full {
+  width: 100%;
+}
+
+.col-acciones {
+  text-align: right;
+  padding-right: 1.5rem;
+}
+
+.action-buttons-cell {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.estado-badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.estado-registrado {
+  background: #e0f2fe;
+  color: #0284c7;
+}
+
+.estado-procesado {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.estado-anulado {
+  background: #fee2e2;
+  color: #b91c1c;
+}

@@ -1,0 +1,69 @@
+<section class="detalle-page">
+  <header class="page-header">
+    <div class="header-title-group">
+      <a matIconButton routerLink="/egresos" title="Volver a egresos">
+        <mat-icon>arrow_back</mat-icon>
+      </a>
+      <h1 class="page-title">Comprobante de egreso</h1>
+    </div>
+  </header>
+
+  @if (cargando()) {
+    <p class="estado">Cargando comprobante...</p>
+  } @else if (egreso(); as data) {
+    <mat-card class="mat-elevation-z3 voucher-card">
+      <mat-card-header class="voucher-card-header">
+        <div class="header-content-row">
+          <div>
+            <h2 class="correlativo-title">Correlativo: {{ data.correlativo }}</h2>
+            <p class="fecha-subtitle">Fecha: {{ data.fecha }}</p>
+          </div>
+          <div class="badge-container">
+            <span class="estado-badge" [ngClass]="'estado-' + data.estado.toLowerCase()">
+              {{ data.estado }}
+            </span>
+          </div>
+        </div>
+      </mat-card-header>
+
+      <mat-card-content class="voucher-card-content">
+        <div class="details-grid">
+          <div>
+            <h3 class="detail-label">Importe</h3>
+            <p class="detail-value importe-value">S/ {{ data.importe | number: '1.2-2' }}</p>
+          </div>
+
+          <div>
+            <h3 class="detail-label">Proveedor</h3>
+            <p class="detail-value">{{ data.proveedor }}</p>
+          </div>
+
+          <div>
+            <h3 class="detail-label">N° de documento</h3>
+            <p class="detail-value">{{ data.numeroDocumento }}</p>
+          </div>
+
+          @if (data.documentoAsociado) {
+            <div>
+              <h3 class="detail-label">Doc. Asociado</h3>
+              <p class="detail-value">{{ data.documentoAsociado }}</p>
+            </div>
+          }
+        </div>
+
+        <mat-divider class="section-divider"></mat-divider>
+
+        <div>
+          <h3 class="detail-label">Motivo</h3>
+          <p class="detail-text">{{ data.motivo }}</p>
+        </div>
+
+        <div class="center-actions">
+          <a matButton="outlined" routerLink="/egresos">Volver al listado</a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  } @else {
+    <p class="estado">No se encontró el egreso solicitado.</p>
+  }
+</section>

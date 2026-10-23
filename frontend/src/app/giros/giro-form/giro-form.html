@@ -1,0 +1,29 @@
+<section class="form-page">
+  <div class="mat-elevation-z3 material-form-card">
+    <h1 class="form-header-title">
+      {{ esEdicion() ? 'Editar giro' : 'Nuevo giro' }}
+    </h1>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form-column-layout">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre del giro</mat-label>
+        <input matInput formControlName="nombre" placeholder="Ej: Abarrotes, Ferretería..." />
+        @if (form.controls.nombre.invalid && form.controls.nombre.touched) {
+          <mat-error>El nombre del giro es obligatorio.</mat-error>
+        }
+      </mat-form-field>
+
+      <div class="form-actions-bar">
+        <a matButton="outlined" routerLink="/giros">Cancelar</a>
+        <button
+          matButton="filled"
+          color="primary"
+          type="submit"
+          [disabled]="guardando() || form.invalid"
+        >
+          {{ guardando() ? 'Guardando...' : 'Guardar' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
